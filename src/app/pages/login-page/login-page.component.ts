@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../auth/auth.service';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-login-page',
@@ -10,7 +12,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class LoginPageComponent {
   form!: FormGroup;
-
+  authService = inject(AuthService)
 
   constructor(private fb: FormBuilder) {
 
@@ -24,7 +26,14 @@ export class LoginPageComponent {
   }
 
   onSubmit() {
-    console.log(this.form.value)
+    
+    if(this.form.valid) {
+      console.log(this.form.value)
+      //@ts-ignore
+      this.authService.login(this.form.value).subscribe((res) => {
+        console.log(res)
+      })
+    }
   }
 
 }
