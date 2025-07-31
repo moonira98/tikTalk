@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
 import { inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -13,6 +14,7 @@ import { inject } from '@angular/core';
 export class LoginPageComponent {
   form!: FormGroup;
   authService = inject(AuthService)
+  router = inject(Router)
 
   constructor(private fb: FormBuilder) {
 
@@ -31,6 +33,7 @@ export class LoginPageComponent {
       console.log(this.form.value)
       //@ts-ignore
       this.authService.login(this.form.value).subscribe((res) => {
+        this.router.navigate([''])
         console.log(res)
       })
     }
