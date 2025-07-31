@@ -15,15 +15,6 @@ import { NgFor } from '@angular/common';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'tikTalk';
-
-  profileService = inject(ProfileService)
-  profiles: IProfile[] = []
-
-constructor () {
-  this.profileService.getTestAccounts().subscribe((res) => {
-    this.profiles = res
-  })
-}
+ 
 
 }
